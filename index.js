@@ -1,101 +1,120 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 //const genEmployee = require("./lib/Employee");
-const genEngineer = require("./lib/Engineer");
-const genIntern = require("./lib/Intern");
-const genManager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
-const promptQuestions = function() {
+const peopleArray = [];
+const promptQuestions= function () {
     inquirer
       .prompt([
         {
           type: "input",
-          message: "What is your name?",
           name: "name",
-        },
-        {
-          type: "id",
-          message: "What is your ID num?",
-          name: "id",
+          message: "What is your name?",
         },
         {
           type: "input",
-          message: "What is your email addr?",
+          name: "id",
+          message: "What is your id number?",
+        },
+        {
+          type: "input",
           name: "email",
+          message: "What is your email?",
         },
         {
           type: "list",
-          message: "What is your role?",
           name: "role",
-          choices: ["Engineer", "Intern", "Manager"], //employee?
+          message: "What is your role?",
+          choices: ["Engineer", "Intern", "Manager"],
         },
       ])
-      .then(function ({ name, id, email, role}) {
-          switch (role) {
-            case "Engineer":
-                inquirer
-                  .prompt({
-                    type: "input",
-                    message: "What is your GitHub username?",
-                    name: "github",
-              }) 
-             .then(function ({ github }) {
-              genEngineer(name, id, email, github);
+      .then((answers) => {
+        if (answers.role === "Engineer") {
+          inquirer
+            .prompt({
+              type: "input",
+              name: "github",
+              message: "What is your GitHub username?",
+            })
+            .then((roleInfo) => {
+              peopleArray.push(
+                new Engineer(
+                  answers.name,
+                  answers.id,
+                  answers.email,
+                  answers.role,
+                  roleInfo.github
+                )
+              );
               addEmp();
             });
-          break;
-            case "Manager":
-                inquirer
-                  .prompt({
-                    type: "input",
-                    message: "What is the Number of your Office?",
-                    name: "officeNumber",
-                  })
-                  .then(function ({ officeNumber }) {
-                    genManager(name, id, email, officeNumber);
-                    addEmp();
-                  });
-                break;  
-             case "Intern":
-                inquirer
-                 .prompt({
-                   type: "input",
-                    message: "What school are you going to?",
-                    name: "school",
-                    })
-                    .then(function ({ school }) {
-                     genIntern(name, id, email, school);
-                     addEmp();
-                 });
-                 break;
-       
-          }
+        } else if (answers.role === "Intern") {
+          inquirer
+            .prompt({
+              type: "input",
+              name: "school",
+              message: "Where do you go to school?",
+            })
+            .then((roleInfo) => {
+              peopleArray.push(
+                new Intern(
+                  answers.name,
+                  answers.id,
+                  answers.email,
+                  answers.role,
+                  roleInfo.school
+                )
+              );
+              addEmp();
+            });
+        } else if (answers.role === "Manager") {
+          inquirer
+            .prompt({
+              type: "input",
+              name: "officeNumber",
+              message: "What is your office number?",
+            })
+            .then((roleInfo) => {
+              peopleArray.push(
+                new Manager(
+                  answers.name,
+                  answers.id,
+                  answers.email,
+                  answers.role,
+                  roleInfo.officeNumber
+                )
+              );
+              addEmp();
+            });
+        }
       });
-    }
+  };
+  
 
     
 
     function addEmp() {
         inquirer
             .prompt({
-                type: "list",
+                type: "confirm",
                 message: "Will you be adding a new employee?",
-                choices: ["Yes", "No"],
+                name: "addEmp",
+             //   choices: ["Yes", "No"],
             })
             .then(function ({ addEmp }) {
-                if ( addEmp ) {
-                    promptQuestions();
-                }
-                else {
+                if (addEmp) {
+                  promptQuestions();
+                } else {
                     `<div class="card" style="width: 25rem">
                         <section class="card-body">
-                          <h5 class="card-title">Name: /h5>
-                          <h6 class="card-subtitle mb-2 text-muted"></h6>
-                              <p class="card-text">
-                               Id: 
-                                </p>
+
+                          <h5 class="card-title">EMPLOYEE NAME /h5>
+                          <h6 class="card-subtitle"></h6>
+                              <p class="card-text">ID: </p>
                             <p>Email: <a href="mailto: " class="card-subtitle"></a></p>
-                            <p><a class="card-subtitle" target="_blank"></a></p>
                            </section>
                           </div>`
                          }
