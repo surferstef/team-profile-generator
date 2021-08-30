@@ -5,7 +5,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
-const peopleArray = [];
+const employeeArray = [];
 const promptQuestions= function () {
     inquirer
       .prompt([
@@ -40,7 +40,7 @@ const promptQuestions= function () {
               message: "What is your GitHub username?",
             })
             .then((roleInfo) => {
-              peopleArray.push(
+              employeeArray.push(
                 new Engineer(
                   answers.name,
                   answers.id,
@@ -59,7 +59,7 @@ const promptQuestions= function () {
               message: "Where do you go to school?",
             })
             .then((roleInfo) => {
-              peopleArray.push(
+              employeeArray.push(
                 new Intern(
                   answers.name,
                   answers.id,
@@ -78,7 +78,7 @@ const promptQuestions= function () {
               message: "What is your office number?",
             })
             .then((roleInfo) => {
-              peopleArray.push(
+              employeeArray.push(
                 new Manager(
                   answers.name,
                   answers.id,
@@ -115,6 +115,8 @@ const promptQuestions= function () {
                           <h6 class="card-subtitle"></h6>
                               <p class="card-text">ID: </p>
                             <p>Email: <a href="mailto: " class="card-subtitle"></a></p>
+
+
                            </section>
                           </div>`
                          }
