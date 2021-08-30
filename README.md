@@ -20,11 +20,11 @@ This is a Node.js command-line application that takes in information about emplo
 https://drive.google.com/file/d/1B36l4umK32ENrvWW7jhLqnIvKmrZ6nTp/view
 
 ## Installation Steps
-npm i (install)
-npm i inquirer
-npm i jest 
-npm run test (to test)
-node index (to run application from node)
+* npm i (install)
+* npm i inquirer
+* npm i jest 
+* npm run test (to test)
+* node index (to run application from node)
 
 ## Contributors
 Stefan Hall
