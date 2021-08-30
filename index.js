@@ -32,6 +32,18 @@ const promptQuestions = function() {
       ])
       .then(function ({ name, id, email, role}) {
           switch (role) {
+            case "Engineer":
+                inquirer
+                  .prompt({
+                    type: "input",
+                    message: "What is your GitHub username?",
+                    name: "github",
+              }) 
+             .then(function ({ github }) {
+              genEngineer(name, id, email, github);
+              addEmp();
+            });
+          break;
             case "Manager":
                 inquirer
                   .prompt({
@@ -56,18 +68,11 @@ const promptQuestions = function() {
                      addEmp();
                  });
                  break;
-            case "Engineer":
-                inquirer
-                  .prompt({
-                    type: "input",
-                    message: "What is your GitHub username?",
-                    name: "github",
-              }) 
-             .then(function ({ github }) {
-              genEngineer(name, id, email, github);
-              addEmp();
-            });
-          break;
+       
           }
       });
     }
+
+    
+
+
