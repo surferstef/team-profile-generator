@@ -4,6 +4,8 @@ const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+//let renderFile = require("./lib/RenderFile");
+//const renderForm = renderFile.renderMain;
 
 const employeeArray = [];
 const promptQuestions= function () {
@@ -108,17 +110,7 @@ const promptQuestions= function () {
                 if (addEmp) {
                   promptQuestions();
                 } else {
-                    `<div class="card" style="width: 25rem">
-                        <section class="card-body">
-
-                          <h5 class="card-title">EMPLOYEE NAME /h5>
-                          <h6 class="card-subtitle"></h6>
-                              <p class="card-text">ID: </p>
-                            <p>Email: <a href="mailto: " class="card-subtitle"></a></p>
-
-
-                           </section>
-                          </div>`
+                    //renderForm();
                          }
                      })
                     .catch((err) => {
