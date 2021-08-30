@@ -75,4 +75,37 @@ const promptQuestions = function() {
 
     
 
+    function addEmp() {
+        inquirer
+            .prompt({
+                type: "list",
+                message: "Will you be adding a new employee?",
+                choices: ["Yes", "No"],
+            })
+            .then(function ({ addEmp }) {
+                if ( addEmp ) {
+                    promptQuestions();
+                }
+                else {
+                    `<div class="card" style="width: 25rem">
+                        <section class="card-body">
+                          <h5 class="card-title">Name: /h5>
+                          <h6 class="card-subtitle mb-2 text-muted"></h6>
+                              <p class="card-text">
+                               Id: 
+                                </p>
+                            <p>Email: <a href="mailto: " class="card-subtitle"></a></p>
+                            <p><a class="card-subtitle" target="_blank"></a></p>
+                           </section>
+                          </div>`
+                         }
+                     })
+                    .catch((err) => {
+                      console.log("Error when you tried to add a new emp!", err);
+                      throw err;
+                  });
+        
+        }
+    
 
+    promptQuestions();
